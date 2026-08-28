@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Piano Scribe · 钢琴录音转谱</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>🎹 Piano Scribe</h1>
+      <p class="tagline">上传一段钢琴录音，自动生成可读的钢琴谱（MIDI / MusicXML / 谱面图像）</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="card upload-card">
+      <div id="dropzone" class="dropzone">
+        <div class="dz-icon">🎵</div>
+        <p class="dz-title">拖拽音频到这里，或点击选择文件</p>
+        <p class="dz-hint">支持 WAV / MP3 / FLAC / OGG / M4A 等，单文件 ≤ 100 MB</p>
+        <input type="file" id="fileInput" accept=".wav,.mp3,.flac,.ogg,.m4a,.aac,.webm,.aiff,.aif" hidden>
+      </div>
+      <div class="controls">
+        <label class="engine-label" for="engine">转写引擎</label>
+        <select id="engine">
+          <option value="auto" selected>自动选择</option>
+        </select>
+        <button id="demoBtn" class="demo">🎵 用示例音频试试</button>&nbsp;<button id="transcribeBtn" class="primary" disabled>开始转写</button>
+      </div>
+      <div id="selected" class="selected hidden"></div>
+    </section>
+
+    <section id="progress" class="card hidden">
+      <div class="spinner"></div>
+      <div id="progressText">正在处理…</div>
+    </section>
+
+    <section id="error" class="card error-card hidden"></section>
+
+    <section id="result" class="hidden">
+      <div class="card summary">
+        <h2>转写结果</h2>
+        <div id="summaryMeta" class="meta"></div>
+        <div id="audioWrap" class="audio-wrap hidden">
+          <h3>原始录音</h3>
+          <audio id="audioPlayer" controls></audio>
+        </div>
+        <div class="downloads">
+          <a id="dlMidi" class="btn" download>MIDI</a>
+          <a id="dlXml" class="btn" download>MusicXML</a>
+          <a id="dlSvg" class="btn" download>谱面 SVG</a>
+          <a id="dlPng" class="btn hidden" download>谱面 PNG</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>钢琴谱</h2>
+        <div id="score" class="score"></div>
+      </div>
+
+      <div class="card">
+        <h2>音符列表</h2>
+        <div class="table-wrap">
+          <table id="notesTable">
+            <thead><tr><th>#</th><th>音名</th><th>MIDI</th><th>开始 (s)</th><th>时长 (s)</th><th>力度</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Piano Scribe · 基于 Basic Pitch / librosa / music21 / Verovio 的开源项目骨架</footer>
+  <script src="/static/app.js"></script>
+</body>
+</html>
+

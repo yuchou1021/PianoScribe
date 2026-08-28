@@ -1,0 +1,7 @@
+# 可选：Basic Pitch 深度学习引擎（需 Python 3.11）
+# 安装方式：python -m pip install -r requirements.txt -r requirements-ml.txt
+#   pip install -r requirements.txt -r requirements-ml.txt
+tensorflow==2.15.1
+basic-pitch==0.2.6
+mir-eval==0.8.2
+resampy==0.4.3
